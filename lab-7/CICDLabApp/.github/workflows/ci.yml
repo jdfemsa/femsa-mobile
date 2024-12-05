@@ -1,0 +1,36 @@
+name: IronHack CI - Lab 7
+
+run-name: CI Lab - @${{ github.actor }}
+
+# Objective 1: Trigger Conditions
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Objective 2: Checkout Code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Objective 3: Set Up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      # Objective 4: Install Dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Objective 5: Validate TypeScript
+      - name: Validate TypeScript
+        run: npx tsc --noEmit
+
+      # Objective 6: Run Tests
+      - name: Run tests
+        run: npm run test
